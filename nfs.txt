@@ -22,3 +22,27 @@
 
 ##########################################################################
 
+- name: Ensure NIS server services are not in use (RHEL 7 only)
+  hosts: all
+  become: yes
+  tasks:
+    - name: Stop and disable NIS-related services
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: stopped
+        enabled: no
+      loop:
+        - ypserv
+        - yppasswdd
+        - ypbind
+      ignore_errors: yes
+
+    - name: Remove NIS server packages
+      ansible.builtin.package:
+        name:
+          - ypserv
+          - ypbind
+        state: absent
+      ignore_errors: yes
+
+
