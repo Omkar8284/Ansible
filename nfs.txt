@@ -1,0 +1,24 @@
+- name: Harden system by disabling and removing NFS
+  hosts: all
+  become: yes
+  tasks:
+    - name: Stop and disable NFS-related services
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: stopped
+        enabled: no
+      loop:
+        - nfs-server
+        - rpcbind
+      ignore_errors: yes
+
+    - name: Ensure nfs-utils package is removed
+      ansible.builtin.package:
+        name: nfs-utils
+        state: absent
+      ignore_errors: yes
+
+
+
+##########################################################################
+
