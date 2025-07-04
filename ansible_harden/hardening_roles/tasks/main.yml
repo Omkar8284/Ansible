@@ -43,3 +43,17 @@
       - ypbind
     state: absent
   ignore_errors: yes
+
+
+  - name: Stop and disable rsyncd service
+    ansible.builtin.service:
+      name: rsyncd
+      state: stopped
+      enabled: no
+    ignore_errors: yes
+
+  - name: Remove rsync package (optional)
+    ansible.builtin.package:
+      name: rsync
+      state: absent
+    ignore_errors: yes
