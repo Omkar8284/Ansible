@@ -52,8 +52,30 @@
       enabled: no
     ignore_errors: yes
 
-  - name: Remove rsync package (optional)
-    ansible.builtin.package:
+ - name: Remove rsync package (optional)
+   ansible.builtin.package:
       name: rsync
       state: absent
+   ignore_errors: yes
+
+ 
+  - name: Stop and disable proxy services
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: stopped
+      enabled: no
+    loop:
+        - squid
+        - tinyproxy
+      ignore_errors: yes
+
+  - name: Remove proxy server packages (optional)
+    ansible.builtin.package:
+      name:
+        - squid
+        - tinyproxy
+      state: absent
     ignore_errors: yes
+
+
+ 
