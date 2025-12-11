@@ -172,7 +172,7 @@
 ################################################## Role 6 ###################################################################
 
 
-# tasks file for ./mcx_hardening_6_role
+# tasks file for ./_hardening_6_role
 
 - name: "6.1.9  Ensure permissions on /etc/shells are configured"
   ansible.builtin.file:

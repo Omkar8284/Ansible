@@ -1,5 +1,5 @@
 ---
-# defaults file for ./mcx_hardening_5_role
+# defaults file for ./_hardening_5_role
 
 kernel_modules_to_disable:
   - name: freevxfs

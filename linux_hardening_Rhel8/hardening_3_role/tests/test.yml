@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ./mcx_hardening_3_role
+    - ./_hardening_3_role

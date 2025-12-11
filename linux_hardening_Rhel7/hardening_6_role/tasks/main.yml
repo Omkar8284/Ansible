@@ -1,5 +1,5 @@
 ---
-# tasks file for ./mcx_hardening_6_role
+# tasks file for ./_hardening_6_role
 
 - name: "6.1.9  Ensure permissions on /etc/shells are configured"
   ansible.builtin.file:
@@ -218,5 +218,5 @@
 #      loop_control:
 #        label: "{{ item.item }}"
 
-# Critical point : Need to check from Mcx : cause major issues in binary's as setting bit 0 : unable to use sudo
+# Critical point : Need to check from  : cause major issues in binary's as setting bit 0 : unable to use sudo
 

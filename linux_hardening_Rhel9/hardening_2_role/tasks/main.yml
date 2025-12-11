@@ -47,7 +47,7 @@
 
 - name: "2.2.22 Ensure only approved services are listening on a network interface"
   debug:
-    msg: 'We have already implemented disabling services in Script prev_hardening_script@Mcx - Discussed with infra'
+    msg: 'We have already implemented disabling services in Script prev_hardening_script@ - Discussed with infra'
 
 - name: "2.2.21 | Ensure mail transfer agents are configured for local-only mode"
   ansible.builtin.lineinfile:

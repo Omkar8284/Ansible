@@ -1,5 +1,5 @@
 ---
-# handlers file for ./mcx_hardening_5_role
+# handlers file for ./_hardening_5_role
 - name: Restart_rsyslog
   systemd:
     name: rsyslog

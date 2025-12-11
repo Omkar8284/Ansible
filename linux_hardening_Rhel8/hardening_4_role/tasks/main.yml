@@ -1,6 +1,6 @@
 ---
 #This role is dedicated to test one by one task at a time. This file is soft link      ln TestingRole/tasks/main.yml testHere.yml   ie. shortcut to file
-#NOTE: Variable values to take from MCX
+#NOTE: Variable values to take from 
 - name: "4.2.4 Ensure sshd access is configured"
   when: not skip_after_hardening
   block:
