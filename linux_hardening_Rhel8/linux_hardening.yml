@@ -3,10 +3,10 @@
   hosts: all
   become: true
   roles:
-    - mcx_hardening_1_role
-    - mcx_hardening_2_role
-    - mcx_hardening_3_role
-    - mcx_hardening_4_role
-    - mcx_hardening_5_role
-    - mcx_hardening_6_role
-    - mcx_hardening_pam_role
+    - hardening_1_role
+    - hardening_2_role
+    - hardening_3_role
+    - hardening_4_role
+    - hardening_5_role
+    - hardening_6_role
+  
