@@ -1,1 +1,48 @@
+---
+- name: System Health Check with Report Generation
+  hosts: local
+  gather_facts: yes
+  become: false
+
+  vars:
+    report_dir: /home/servera/health-check
+    report_file: "health_report_{{ ansible_date_time.date }}_{{ ansible_date_time.time }}.txt"
+
+  tasks:
+
+    - name: Ensure report directory exists
+      file:
+        path: "{{ report_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Generate system health report
+      copy:
+        dest: "{{ report_dir }}/{{ report_file }}"
+        content: |
+          ===============================
+          SYSTEM HEALTH CHECK REPORT
+          ===============================
+          Hostname : {{ ansible_facts.hostname }}
+          Date     : {{ ansible_date_time.iso8601 }}
+
+          ---- CPU DETAILS ----
+          Architecture  : {{ ansible_facts.architecture }}
+          CPU Model     : {{ ansible_facts.processor[1] }}
+          CPU Cores     : {{ ansible_facts.processor_vcpus }}
+
+          ---- MEMORY DETAILS ----
+          Total Memory  : {{ ansible_facts.memtotal_mb }} MB
+          Free Memory   : {{ ansible_facts.memfree_mb }} MB
+          Used Memory   : {{ ansible_facts.memtotal_mb - ansible_facts.memfree_mb }} MB
+
+          ---- DISK DETAILS ----
+          {% for mount in ansible_facts.mounts if mount.fstype != 'tmpfs' %}
+          Mount Point   : {{ mount.mount }}
+          Total Size   : {{ (mount.size_total / 1024 / 1024 / 1024) | round(2) }} GB
+          Used Size    : {{ ((mount.size_total - mount.size_available) / 1024 / 1024 / 1024) | round(2) }} GB
+          Free Size    : {{ (mount.size_available / 1024 / 1024 / 1024) | round(2) }} GB
+          Usage %      : {{ ((mount.size_total - mount.size_available) / mount.size_total * 100) | round(2) }} %
+          ------------------------------
+          {% endfor %}
 
